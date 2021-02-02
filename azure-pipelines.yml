@@ -85,9 +85,11 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(WebAppNameDev)'
+              azureSubscription: 'PhillipsEdgeWater(a46d2a1a-bdc3-443f-a87c-2bd30f952597)'
+              appType: 'webApp'
+              appName: 'tailspin-space-game-web-dev-pe1'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              deploymentMethod: 'auto'
 
 - stage: 'Test'
   displayName: 'Deploy to the test environment'
@@ -108,9 +110,11 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(WebAppNameTest)'
+              azureSubscription: 'PhillipsEdgeWater(a46d2a1a-bdc3-443f-a87c-2bd30f952597)'
+              appType: 'webApp'
+              appName: 'tailspin-space-game-web-test-pe1'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              deploymentMethod: 'auto'
   - job: RunUITests
     dependsOn: Deploy
     displayName: 'Run UI tests'
@@ -156,6 +160,8 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(WebAppNameStaging)'
+              azureSubscription: 'PhillipsEdgeWater(a46d2a1a-bdc3-443f-a87c-2bd30f952597)'
+              appType: 'webApp'
+              appName: 'tailspin-space-game-web-staging-pe1'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              deploymentMethod: 'auto'
